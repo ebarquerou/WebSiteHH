@@ -10,8 +10,9 @@ function setup()
 	//Get the default device from the application as a first step. Discovery takes longer to complete.
 	BrowserPrint.getDefaultDevice("printer", function(device)
 			{
-		
-				//Add device to list of devices and to html select element
+		 
+				alert("Inicio 1");
+		                //Add device to list of devices and to html select element
 				selected_device = device;
 				devices.push(device);
 				var html_select = document.getElementById("selected_device");
@@ -19,14 +20,17 @@ function setup()
 				option.text = device.name;
 				html_select.add(option);
 				
+				alert("Inicio 2");
 				//Discover any other devices available to the application
 				BrowserPrint.getLocalDevices(function(device_list){
+				        alert("Inicio 3");
 					for(var i = 0; i < device_list.length; i++)
 					{
 						//Add device to list of devices and to html select element
 						var device = device_list[i];
 						if(!selected_device || device.uid != selected_device.uid)
 						{
+				                        alert("Inicio 4");
 							devices.push(device);
 							var option = document.createElement("option");
 							option.text = device.name;
@@ -38,7 +42,7 @@ function setup()
 				}, function(){alert("Error getting local devices")},"printer");
 				
 			}, function(error){
-				alert(error);
+				alert("Error:" + error);
 			})
 }
 function getConfig(){
